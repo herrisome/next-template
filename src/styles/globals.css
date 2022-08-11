@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-size: 16px;
+}
+aside::-webkit-scrollbar {
+  display: none;
+}
+html::-webkit-scrollbar {
+  width: 20px;
+}
+
+.swap input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: none;
+}
