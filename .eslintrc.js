@@ -15,9 +15,6 @@ module.exports = {
   rules: {
     '@next/next/no-img-element': 'off',
 
-    '@typescript-eslint/ban-types': 'off',
-    '@typescript-eslint/no-explicit-any': 'off',
-
     'no-unused-vars': 'off',
     'no-console': 'warn',
     '@typescript-eslint/explicit-module-boundary-types': 'off',

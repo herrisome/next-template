@@ -11,10 +11,7 @@ export default function NotFoundPage() {
 
       <main>
         <section>
-          <div
-            className='layout text-black  flex flex-col items-center justify-center text-center'
-            style={{ height: 'calc(100vh - 10rem)' }}
-          >
+          <div className='layout text-black flex  h-full flex-col items-center justify-center text-center'>
             <TbError404
               size={60}
               className='drop-shadow-glow animate-flicker text-red-500'

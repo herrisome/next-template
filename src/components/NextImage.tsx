@@ -1,7 +1,11 @@
+import clsx, { ClassValue } from 'clsx';
 import Image, { ImageProps } from 'next/image';
 import * as React from 'react';
+import { twMerge } from 'tailwind-merge';
 
-import clsxM from '@/lib/clsxm';
+function clsxM(...classes: ClassValue[]) {
+  return twMerge(clsx(...classes));
+}
 
 type NextImageProps = {
   useSkeleton?: boolean;

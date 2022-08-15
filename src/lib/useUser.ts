@@ -1,4 +1,5 @@
-import Router from 'next/router';
+import { useToast } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import useSWR from 'swr';
 
@@ -9,6 +10,8 @@ export default function useUser({
   redirectTo = '',
   redirectIfFound = false,
 } = {}) {
+  const router = useRouter();
+  const toast = useToast();
   const { data: user, mutate: mutateUser } = useSWR<User>(
     '/api/auth/user',
     fetchJson
@@ -21,7 +24,16 @@ export default function useUser({
       (redirectTo && !redirectIfFound && !user?.isLoggedIn) ||
       (redirectIfFound && user?.isLoggedIn)
     ) {
-      Router.push(redirectTo);
+      router.push(redirectTo).then(
+        (r) =>
+          r ||
+          toast({
+            position: 'top',
+            title: '跳转失败',
+            isClosable: true,
+            status: 'error',
+          })
+      );
     }
 
     user.isLoggedIn &&
