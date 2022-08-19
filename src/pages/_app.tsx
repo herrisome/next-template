@@ -2,6 +2,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { NextPage } from 'next';
 import { AppProps } from 'next/app';
 import * as React from 'react';
+import { RecoilRoot } from 'recoil';
 import { SWRConfig } from 'swr';
 
 import '@/styles/globals.css';
@@ -19,7 +20,6 @@ type Props = AppProps & {
 
 export default function MyApp({ Component, pageProps }: Props) {
   const getLayout = Component.getLayout;
-
   // eslint-disable-next-line no-console
   console.log(`
     ********************************************************
@@ -34,21 +34,23 @@ export default function MyApp({ Component, pageProps }: Props) {
     `);
 
   return (
-    <SWRConfig
-      value={{
-        fetcher: fetchJson,
-        onError: (err) => {
-          return err;
-        },
-      }}
-    >
-      <ChakraProvider theme={theme}>
-        {getLayout ? (
-          getLayout(<Component {...pageProps} />)
-        ) : (
-          <Component {...pageProps} />
-        )}
-      </ChakraProvider>
-    </SWRConfig>
+    <RecoilRoot>
+      <SWRConfig
+        value={{
+          fetcher: fetchJson,
+          onError: (err) => {
+            return err;
+          },
+        }}
+      >
+        <ChakraProvider theme={theme}>
+          {getLayout ? (
+            getLayout(<Component {...pageProps} />)
+          ) : (
+            <Component {...pageProps} />
+          )}
+        </ChakraProvider>
+      </SWRConfig>
+    </RecoilRoot>
   );
 }

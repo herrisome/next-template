@@ -5,11 +5,23 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import * as React from 'react';
+import { useEffect } from 'react';
+import { useRecoilState } from 'recoil';
 
 import { getLayout } from '@/components/layout/Layout';
 import Seo from '@/components/Seo';
 
-export default function HomePage() {
+import { userState } from '@/store/store';
+
+import { USER } from '@/lib/type';
+
+export default function HomePage(props: { user: USER }) {
+  const [, setUserInfo] = useRecoilState(userState);
+
+  useEffect(() => {
+    setUserInfo(props.user);
+  }, []);
+
   //!THEME 主题配置
   const itemBg = useColorModeValue('white', 'navy.800');
 
@@ -37,6 +49,15 @@ export default function HomePage() {
       </SimpleGrid>
     </>
   );
+}
+
+export async function getServerSideProps() {
+  const user = await fetch('http://localhost:8000/api/v1/articleList');
+  const userJson = await user.json();
+
+  return {
+    props: { user: userJson.data },
+  };
 }
 
 HomePage.getLayout = getLayout;

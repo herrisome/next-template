@@ -3,6 +3,7 @@ export default async function fetchJson<JSON = unknown>(
   init?: RequestInit
 ): Promise<JSON> {
   const response = await fetch(input, init);
+
   const data = await response.json();
 
   // res.status 为 2xx 时 response.ok为true

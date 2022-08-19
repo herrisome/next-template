@@ -15,17 +15,21 @@ import React from 'react';
 import { FaCalendarAlt } from 'react-icons/fa';
 import { IoMdMoon, IoMdSunny } from 'react-icons/io';
 import { MdNotificationsNone } from 'react-icons/md';
+import { useRecoilState } from 'recoil';
 
 import { router } from '@/components/layout/Layout';
 import { ItemContent } from '@/components/menu/ItemContent';
 import { SearchBar } from '@/components/navbar/searchBar/SearchBar';
 import { SidebarResponsive } from '@/components/sidebar/Sidebar';
 
+import { userState } from '@/store/store';
+
 export default function HeaderLinks(props: {
   secondary: boolean;
   logoText: string | undefined;
   scrolled: boolean;
 }) {
+  const [userInfo] = useRecoilState(userState);
   const { secondary } = props;
   const { colorMode, toggleColorMode } = useColorMode();
 
@@ -138,7 +142,10 @@ export default function HeaderLinks(props: {
               borderRadius='8px'
               mb='10px'
             >
-              <ItemContent info='开历史倒车者，必将走入歧途' aName='人民日报' />
+              <ItemContent
+                info='开历史倒车者，必将走入歧途（下）'
+                aName='人民日报'
+              />
             </MenuItem>
             <MenuItem
               _hover={{ bg: 'none' }}
@@ -147,7 +154,10 @@ export default function HeaderLinks(props: {
               borderRadius='8px'
               mb='10px'
             >
-              <ItemContent info='地平线设计系统免费' aName='乔什·亨利' />
+              <ItemContent
+                info='开历史倒车者，必将走入歧途（上）'
+                aName='人民日报'
+              />
             </MenuItem>
           </Flex>
         </MenuList>
@@ -175,9 +185,9 @@ export default function HeaderLinks(props: {
         <MenuButton p='0px'>
           <Avatar
             _hover={{ cursor: 'pointer' }}
-            src='https://iconfont.alicdn.com/p/illus/file/eq619pYlknZI/046174e5-0181-429e-ab06-2c42492281ff_origin.svg'
+            src={userInfo.UserAvatarUrl}
             color='white'
-            name='白衣菩萨'
+            name={userInfo?.userName}
             bg='#11047A'
             size='sm'
             w='40px'
@@ -204,7 +214,7 @@ export default function HeaderLinks(props: {
               fontWeight='700'
               color={textColor}
             >
-              👋&nbsp; 欢迎回来，白衣菩萨
+              👋&nbsp; 欢迎回来，{userInfo?.userName}
             </Text>
           </Flex>
           <Flex flexDirection='column' p='10px'>

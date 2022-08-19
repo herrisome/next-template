@@ -1,9 +1,9 @@
 import { Box, Portal, useDisclosure } from '@chakra-ui/react';
 import React, { useState } from 'react';
-import { AiOutlineDotChart } from 'react-icons/ai';
-import { BsTable } from 'react-icons/bs';
-import { CgOptions } from 'react-icons/cg';
+import { CgCalendarDates } from 'react-icons/cg';
 import { GoDashboard } from 'react-icons/go';
+import { SiChartdotjs } from 'react-icons/si';
+import { VscChecklist, VscNotebookTemplate } from 'react-icons/vsc';
 
 import Navbar from '@/components/navbar/Navbar';
 import Sidebar from '@/components/sidebar/Sidebar';
@@ -11,24 +11,28 @@ import Sidebar from '@/components/sidebar/Sidebar';
 export const router = [
   {
     name: '仪表盘',
-    path: '/default',
+    path: '/dashboard',
     icon: <GoDashboard />,
   },
   {
     name: '可视化',
-    path: '/nft-marketplace',
-    icon: <AiOutlineDotChart />,
-    secondary: true,
+    path: '/scheduling-visualization',
+    icon: <SiChartdotjs />,
   },
   {
-    name: '数据表',
-    path: '/data-tables',
-    icon: <BsTable />,
+    name: '信息管理',
+    path: '/information-management',
+    icon: <CgCalendarDates />,
   },
   {
-    name: '配置维护',
-    path: '/profile',
-    icon: <CgOptions />,
+    name: '计划管理',
+    path: '/program-management',
+    icon: <VscChecklist />,
+  },
+  {
+    name: '模板管理',
+    path: '/template-management',
+    icon: <VscNotebookTemplate />,
   },
 ];
 

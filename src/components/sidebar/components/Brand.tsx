@@ -1,7 +1,7 @@
 import { Flex, useColorModeValue } from '@chakra-ui/react';
 import React from 'react';
 
-import { AppleLogo } from '@/components/icons/icon';
+import { RocketIcon } from '@/components/icons/icon';
 
 export function SidebarBrand() {
   //!THEME 主题配置
@@ -9,7 +9,10 @@ export function SidebarBrand() {
 
   return (
     <Flex align='center' direction='column'>
-      <AppleLogo h='26px' w='175px' my='32px' color={logoColor} />
+      <div className='flex items-center justify-items-center'>
+        <RocketIcon h='26px' w='50px' my='32px' color={logoColor} />
+        <span className='font-sans text-2xl font-bold'>统一调度平台</span>
+      </div>
       <HSeparator />
     </Flex>
   );
