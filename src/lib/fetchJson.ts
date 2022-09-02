@@ -10,7 +10,6 @@ export default async function fetchJson<JSON = unknown>(
   if (response.ok) {
     return data;
   }
-
   throw new FetchError({
     message: response.statusText,
     response,
@@ -23,6 +22,7 @@ export class FetchError extends Error {
   data: {
     message: string;
   };
+
   constructor({
     message,
     response,

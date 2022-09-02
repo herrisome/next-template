@@ -5,11 +5,11 @@ const { fontFamily } = require('tailwindcss/defaultTheme');
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
-    colors: {},
     fontFamily: {
       sans: ['HarmonyOS Sans', 'Helvetica', 'Arial', 'sans-serif'],
       code: ['Fira Code', 'Helvetica', 'Arial', 'sans-serif'],
       kai: ['楷体-简', '楷体', 'Helvetica', 'Arial', 'sans-serif'],
+      MacCao: ['Liu Jian Mao Cao'],
     },
     extend: {
       fontFamily: {
