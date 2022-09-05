@@ -456,7 +456,7 @@ const StepMaintenance = () => {
           selectionKeys={selectedNodekey}
           onSelectionChange={(e) => setSelectedNodekey(e.value)}
           paginator
-          rows={20}
+          rows={10}
           rowsPerPageOptions={[5, 10, 15, 20, 25]}
           globalFilter={globalFilter}
           className='md:text-lg'

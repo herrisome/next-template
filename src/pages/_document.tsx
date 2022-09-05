@@ -8,7 +8,7 @@ import * as React from 'react';
 
 export default function Document() {
   return (
-    <Html>
+    <Html lang='zh'>
       <Head>
         <link
           id='theme-link'

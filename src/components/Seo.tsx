@@ -3,10 +3,9 @@ import { useRouter } from 'next/router';
 import * as React from 'react';
 
 const defaultMeta = {
-  title: 'ITPSP',
-  siteName: 'ITPSP',
-  description:
-    'Next.js、Tailwind CSS 和 TypeScript 的启动器，带有部分组件，预配置了 Husky',
+  title: '统一调度平台',
+  siteName: '统一调度平台',
+  description: '统一调度平台',
   url: '',
   type: 'website',
   robots: 'follow, index',

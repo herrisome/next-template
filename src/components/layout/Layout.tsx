@@ -34,14 +34,14 @@ const menu: MENU[] = [
     label: '信息管理',
     items: [
       {
+        label: '流程维护',
+        icon: 'pi pi-fw pi-sync',
+        to: '/process-maintenance',
+      },
+      {
         label: '模板维护',
         icon: 'pi pi-fw pi-table',
         to: '/template-maintenance',
-      },
-      {
-        label: '步骤维护',
-        icon: 'pi pi-fw pi-list',
-        to: '/step-maintenance',
       },
     ],
   },

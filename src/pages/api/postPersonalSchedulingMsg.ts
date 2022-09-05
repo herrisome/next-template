@@ -22,7 +22,7 @@ export default async function loginRoute(
       'https://open.feishu.cn/open-apis/ephemeral/v1/send',
       {
         open_id: 'ou_19d3bdee147b4141547a2ae4b7643e84',
-        chat_id: 'oc_644100faeaec49b48f36158a75320413',
+        chat_id: 'oc_f32c119151a40858e3db432b35d37224',
         msg_type: 'interactive',
         card: {
           elements: [

@@ -6,8 +6,9 @@ import { DataTable } from 'primereact/datatable';
 import React, { useEffect, useState } from 'react';
 
 import { getLayout } from '@/components/layout/Layout';
+import Seo from '@/components/Seo';
 
-import list from '@/assets/CHART_DATA.json';
+import list from '@/assets/SCHEDULING_LIST.json';
 
 const ReactApexChart = dynamic(() => import('react-apexcharts'), {
   ssr: false,
@@ -47,6 +48,17 @@ const chartData = [
     tension: 0.4,
   },
 ];
+
+// const ProcessSchedulingData = list.data.map((e) => {
+//     return {
+//         missionName: e.missionName,
+//         missionType: e.missionType,
+//         missionStartTime: e.missionStartTime,
+//         missionEndTime: e.missionEndTime,
+//         missionStatus: e.missionStatus,
+//         missionProgress: e.missionProgress,
+//     };
+// }
 
 const xAxis = [
   '2022-01',
@@ -139,6 +151,7 @@ const Dashboard = () => {
 
   return (
     <div>
+      <Seo templateTitle='仪表盘' />
       <div className='grid grid-cols-2 gap-4 md:grid-cols-4 '>
         {TABLE_DATA.map(({ name, date, numberOfTimes }, i) => (
           <div
@@ -194,10 +207,10 @@ const Dashboard = () => {
                   />
                 )}
               />
-              <Column field='processName' header='流程名称' />
-              <Column field='scheduleDate' header='调度日期' sortable />
+              <Column field='missionName' header='流程名称' />
+              <Column field='executionDate' header='调度日期' sortable />
               <Column field='timeConsuming' header='耗时(min)' sortable />
-              <Column field='problem' header='记录问题' sortable />
+              <Column field='questionList' header='记录问题' sortable />
               <Column
                 header='查看'
                 body={() => (

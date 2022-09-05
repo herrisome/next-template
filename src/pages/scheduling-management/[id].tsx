@@ -1,5 +1,3 @@
-// noinspection JSIgnoredPromiseFromCall
-
 import axios from 'axios';
 import { Button } from 'primereact/button';
 import { Column } from 'primereact/column';
@@ -35,12 +33,18 @@ const Id = () => {
           label='批量调度'
           icon='pi pi-play'
           className='p-button-success p-button-sm'
+          disabled={
+            !selectedNodekey || Object.keys(selectedNodekey).length === 0
+          }
           // onClick={openNew}
         />
         <Button
           label='批量通知'
           icon='pi pi-phone'
           className='p-button-danger p-button-sm'
+          disabled={
+            !selectedNodekey || Object.keys(selectedNodekey).length === 0
+          }
           // onClick={confirmDeleteSelected}
         />
       </span>
@@ -62,26 +66,54 @@ const Id = () => {
   };
 
   // 操作按钮
-  const actionBodyTemplate = () => {
-    //TODO: rowData: LIST_ITEM
+  const actionBodyTemplate = (rowData: LIST_ITEM) => {
     return (
       <div className='actions'>
         <Button
-          icon='pi pi-play'
-          className='p-button-rounded p-button-success mr-2'
+          icon={`pi ${
+            rowData.data.status !== '未开始' ? 'pi-replay' : 'pi-play'
+          }`}
+          className={`p-button-rounded ${
+            rowData.data.status !== '未开始'
+              ? 'p-button-info'
+              : 'p-button-success'
+          } mr-2`}
           onClick={() => {
-            axios.post('/api/postPersonalSchedulingMsg');
+            axios.post('/api/postPersonalSchedulingMsg').then(() => {
+              toast.current?.show({
+                severity: 'success',
+                summary: '成功',
+                detail: '调度成功',
+                life: 3000,
+              });
+            });
+          }}
+        />
+        <Button
+          icon='pi pi-stop'
+          className='p-button-rounded p-button-warning mr-2'
+          onClick={() => {
+            axios.post('/api/postPersonalSchedulingCall').then(() => {
+              toast.current?.show({
+                severity: 'success',
+                summary: '成功',
+                detail: '通知成功',
+                life: 3000,
+              });
+            });
           }}
         />
         <Button
           icon='pi pi-phone'
           className='p-button-rounded p-button-danger mr-2'
           onClick={() => {
-            (toast.current as Toast).show({
-              severity: 'warn',
-              summary: '功能停用',
-              detail: '发送电话消息权限审核中，通过后启用',
-              life: 3000,
+            axios.post('/api/postPersonalSchedulingCall').then(() => {
+              toast.current?.show({
+                severity: 'success',
+                summary: '成功',
+                detail: '已电话通知 ',
+                life: 3000,
+              });
             });
           }}
         />
@@ -124,7 +156,7 @@ const Id = () => {
           selectionKeys={selectedNodekey}
           onSelectionChange={(e) => setSelectedNodekey(e.value)}
           paginator
-          rows={20}
+          rows={10}
           rowsPerPageOptions={[5, 10, 15, 20, 25]}
           globalFilter={globalFilter}
           className='md:text-lg'
@@ -176,10 +208,10 @@ const Id = () => {
             field='status'
             header='状态'
             body={StatusBadge}
-            style={{ minWidth: '6rem' }}
+            style={{ minWidth: '8rem' }}
             sortable
           />
-          <Column body={actionBodyTemplate} />
+          <Column body={actionBodyTemplate} style={{ minWidth: '30rem' }} />
         </TreeTable>
       </div>
     </div>

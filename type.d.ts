@@ -74,6 +74,8 @@ type SCHEDULING_ITEM = {
   missionName: string;
   minutesOfTheMeeting: string;
   questionList: string;
+  missionProgress: string;
+  missionStatus: string;
 };
 
 type MENU = {
