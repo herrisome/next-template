@@ -82,5 +82,14 @@ type MENU = {
   label: string;
   icon?: string;
   to?: string;
-  items: { label: string; icon: string; to: string }[];
+  items?: MENU[];
+};
+type LOGIN_FORM = { username: string; password: string; code: string };
+
+type CAPTCHA = {
+  code: number;
+  data: string;
+  id: string;
+  msg: string;
+  requestId: string;
 };

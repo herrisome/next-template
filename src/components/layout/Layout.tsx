@@ -258,21 +258,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     menuClick = true;
   };
 
-  const onMobileTopbarMenuClick = (event: { preventDefault: () => void }) => {
-    mobileTopbarMenuClick = true;
-
-    setMobileTopbarMenuActive((prevState) => !prevState);
-    event.preventDefault();
-  };
-
-  const onMobileSubTopbarMenuClick = (event: {
-    preventDefault: () => void;
-  }) => {
-    mobileTopbarMenuClick = true;
-
-    event.preventDefault();
-  };
-
   const onMenuItemClick = (event: { item: { items: MENU_ITEM } }) => {
     if (!event.item.items) {
       setOverlayMenuActive(false);
@@ -337,14 +322,18 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     url: '/',
   };
 
+  const goLogin = () => {
+    router.push('/login');
+  };
+
   return (
     <div className={wrapperClass} onClick={onWrapperClick}>
       <AppTopbar
         onToggleMenuClick={onToggleMenuClick}
         layoutColorMode={layoutColorMode}
         mobileTopbarMenuActive={mobileTopbarMenuActive}
-        onMobileTopbarMenuClick={onMobileTopbarMenuClick}
-        onMobileSubTopbarMenuClick={onMobileSubTopbarMenuClick}
+        onMobileTopbarMenuClick={goLogin}
+        onMobileSubTopbarMenuClick={goLogin}
       />
 
       <div className='layout-sidebar' onClick={onSidebarClick}>

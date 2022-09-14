@@ -43,7 +43,7 @@ const ProcessMaintenance = () => {
     minutesOfTheMeeting: string;
   }) => {
     return (
-      <Link href={`/scheduling-management/${rowData.minutesOfTheMeeting}`}>
+      <Link href={`/process-maintenance/${rowData.minutesOfTheMeeting}`}>
         <a
           className='underline subpixel-antialiased '
           style={{ color: 'var(--primary-color)' }}

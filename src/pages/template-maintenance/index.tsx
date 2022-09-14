@@ -14,7 +14,7 @@ const TemplateMaintenance = () => {
         <div className='card '>
           <Toast ref={toast} />
           <div>
-            <h1>Visualization</h1>
+            <h1>模板维护</h1>
           </div>
         </div>
       </div>

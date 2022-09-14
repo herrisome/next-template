@@ -1,5 +1,6 @@
+import { useRouter } from 'next/router';
 import { Button } from 'primereact/button';
-import { Card } from 'primereact/card';
+import { Card, CardTemplateTypes } from 'primereact/card';
 import { ProgressBar } from 'primereact/progressbar';
 import { Toast } from 'primereact/toast';
 import React, { useRef, useState } from 'react';
@@ -12,7 +13,7 @@ import list from '@/assets/SCHEDULING_LIST.json';
 const ProcessScheduling = () => {
   const [data] = useState<SCHEDULING_ITEM[]>(list.data);
   const toast = useRef<Toast>(null);
-
+  const router = useRouter();
   const header = (
     <img
       alt='Card'
@@ -20,16 +21,24 @@ const ProcessScheduling = () => {
       className='h-60 w-full'
     />
   );
-  const footer = (
-    <span className='flex items-center justify-end'>
-      <Button label='调度' icon='pi pi-sync' />
-      <Button
-        label='可视化'
-        icon='pi pi-tablet'
-        className='p-button-secondary ml-2'
-      />
-    </span>
-  );
+  const footer = (e: { title: string }) => {
+    return (
+      <span className='flex items-center justify-end'>
+        <Button
+          label='调度'
+          icon='pi pi-sync'
+          onClick={() => {
+            router.push(`/scheduling-management/${e.title}`);
+          }}
+        />
+        <Button
+          label='可视化'
+          icon='pi pi-tablet'
+          className='p-button-secondary ml-2'
+        />
+      </span>
+    );
+  };
 
   return (
     <>
@@ -43,7 +52,7 @@ const ProcessScheduling = () => {
                 className='overflow-hidden'
                 title={e.missionName}
                 subTitle={e.executionDate}
-                footer={footer}
+                footer={footer as CardTemplateTypes}
                 header={header}
               >
                 <ProgressBar

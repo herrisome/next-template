@@ -2,117 +2,97 @@ import axios, { AxiosRequestHeaders } from 'axios';
 
 import { getToken } from '@/lib/auth';
 
-/**
- * 环境的配置，区分生产环境和开发环境
- */
-// switch (process.env.NODE_ENV) {
-//   case 'production':
-//     // 生产环境，部署到的服务器
-//     axios.defaults.baseURL = 'http://生产真实地址';
-//     break;
-//   case 'test':
-//     axios.defaults.baseURL = 'http://测试环境';
-//     break;
-//   default:
-//     axios.defaults.baseURL = 'http://开发环境';
-//     break;
-// }
+//1. 创建新的axios实例，
+const service = axios.create({
+  // 公共接口--这里注意后面会讲
+  baseURL: 'http://localhost:8000',
+  // 超时时间 单位是ms，这里设置了3s的超时时间
+  timeout: 3 * 1000,
+});
 
-axios.defaults.baseURL = 'http://localhost:3000/api';
-
-/**
- * 设置超时时间，单位毫秒
- */
-axios.defaults.timeout = 50000;
-
-/**
- * 设置是否允许跨域和是否允许携带凭证，如果该设置为false，请求时不允许携带凭证
- */
-axios.defaults.withCredentials = true;
-
-/**
- * 设置请求头
- */
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded';
-// 针对post请求设置数据格式，该方法transformRequest仅针对post请求有效
-// 使用qs库将传入的data数据转换为 `x-www-form-urlencoded` 格式
-// 当然，这需要看服务器使用什么数据格式，如果服务器使用json，那么不需要这样设置
-// axios.defaults.transformRequest = (data) => qs.stringify(data);
-
-/**
- * 设置请求拦截器。客户端的请求 -> 请求拦截器 -> 服务器
- */
-axios.interceptors.request.use(
-  async (config) => {
-    // 携带token，从本地读取到token，然后添加到请求头
+// 2.请求拦截器
+service.interceptors.request.use(
+  (config) => {
+    config.data = JSON.stringify(config.data);
+    config.headers = {
+      'Content-Type': 'application/json',
+    };
     const token = getToken();
-
     if (token) {
       (config.headers as AxiosRequestHeaders).Authorization = `Bearer ${token}`;
-    } else {
-      const token = await axios.post(
-        'https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal?app_id=cli_a2e82f767579d00b&app_secret=GkppmRVkNE53zH7xA63wddsPS72SiZkY'
-      );
-      (
-        config.headers as AxiosRequestHeaders
-      ).Authorization = `Bearer ${token.data.tenant_access_token}`;
     }
     return config;
   },
   (error) => {
-    return Promise.reject(error);
+    Promise.reject(error);
   }
 );
 
-/**
- * 自定义响应成功的HTTP状态码
- */
-// axios.defaults.validateStatus = status => {
-//   return /^(2|3)\d{2}$/.test(status);
-// };
-
-/**
- * 响应拦截器。它的知性逻辑：
- *   服务器返回信息 -> 相应拦截器 -> 客户端获取到信息
- * 这样可以首先对响应的信息做一些预处理，从而使得客户端的代码更加整洁
- */
-axios.interceptors.response.use(
+// 3.响应拦截器
+service.interceptors.response.use(
   (response) => {
-    // 成功后返回response的主体数据
-    return response.data;
+    //接收到响应数据并成功后的一些共有的处理，关闭loading等
+    return response;
   },
   (error) => {
-    const { response } = error; // 等效于error.response
-    if (response) {
-      switch (response.status) {
+    /***** 接收到异常响应的处理开始 *****/
+    if (error && error.response) {
+      // 1.公共错误处理
+      // 2.根据响应码具体处理
+      switch (error.response.status) {
+        case 400:
+          error.message = '错误请求';
+          break;
         case 401:
-          // 权限不足，登录失效
-          // ...
+          error.message = '未授权，请重新登录';
           break;
         case 403:
-          // 服务器拒绝访问
-          // ...
-          localStorage.removeItem('token');
+          error.message = '拒绝访问';
           break;
         case 404:
-          // 找不到资源
-          // ...
+          error.message = '请求错误,未找到该资源';
+          // window.location.href = '/NotFound';
           break;
+        case 405:
+          error.message = '请求方法未允许';
+          break;
+        case 408:
+          error.message = '请求超时';
+          break;
+        case 500:
+          error.message = '服务器端出错';
+          break;
+        case 501:
+          error.message = '网络未实现';
+          break;
+        case 502:
+          error.message = '网络错误';
+          break;
+        case 503:
+          error.message = '服务不可用';
+          break;
+        case 504:
+          error.message = '网络超时';
+          break;
+        case 505:
+          error.message = 'http版本不支持该请求';
+          break;
+        default:
+          error.message = `连接错误${error.response.status}`;
       }
     } else {
-      // 服务器崩溃或客户端没有网络连接
-      // 通常在这里做断网处理
-      if (!window.navigator.onLine) {
-        // 处理断网
-        // ...
-        return;
+      // 超时处理
+      if (JSON.stringify(error).includes('timeout')) {
+        // Message.error('服务器响应超时，请刷新当前页');
       }
-      //均不满足，返回错误信息
-      return Promise.reject(error);
+      error.message = '连接服务器失败';
     }
+
+    // Message.error(error.message);
+    /***** 处理结束 *****/
+    //如果不需要错误处理，以上的处理过程都可省略
+    return Promise.resolve(error.response);
   }
 );
-
-export default axios;
+//4.导入文件
+export default service;

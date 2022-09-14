@@ -5,6 +5,7 @@ import { NextPage } from 'next';
 import { AppProps } from 'next/app';
 import PrimeReact, { addLocale } from 'primereact/api';
 import * as React from 'react';
+import { RecoilRoot } from 'recoil';
 import { SWRConfig } from 'swr';
 
 import 'primereact/resources/primereact.min.css'; //core css
@@ -94,36 +95,47 @@ addLocale('cn', {
 
 PrimeReact.ripple = false;
 PrimeReact.locale = 'cn';
+
 export default function MyApp({ Component, pageProps }: Props) {
   const getLayout = Component.getLayout;
 
-  // eslint-disable-next-line no-console
-  console.log(`
-    ********************************************************
-               _____ _______ _____   _____ _____  
-              |_   _|__   __|  __ \\ / ____|  __ \\ 
-                | |    | |  | |__) | (___ | |__) |
-                | |    | |  |  ___/ \\___ \\|  ___/ 
-               _| |_   | |  | |     ____) | |     
-              |_____|  |_|  |_|    |_____/|_|     
-                                    
-    ********************************************************
-    `);
-
   return (
-    <SWRConfig
-      value={{
-        fetcher: fetchJson,
-        onError: (err) => {
-          return err;
-        },
-      }}
-    >
-      {getLayout ? (
-        getLayout(<Component {...pageProps} />)
-      ) : (
-        <Component {...pageProps} />
-      )}
-    </SWRConfig>
+    <RecoilRoot>
+      <SWRConfig
+        value={{
+          fetcher: fetchJson,
+          onError: (err) => {
+            return err;
+          },
+        }}
+      >
+        {getLayout ? (
+          getLayout(<Component {...pageProps} />)
+        ) : (
+          <Component {...pageProps} />
+        )}
+      </SWRConfig>
+    </RecoilRoot>
   );
 }
+// {/*<Script*/}
+// {/*  strategy='afterInteractive'*/}
+// {/*  id='454'*/}
+// {/*  src='/track.js'*/}
+// {/*  onLoad={() => {*/}
+// {/*    if (webtracing) {*/}
+// {/*      webtracing.init({*/}
+// {/*        requestUrl: 'http://localhost:3000/api/trackweb/tra',*/}
+// {/*        appName: 'itpsp',*/}
+// {/*        event: {*/}
+// {/*          core: true,*/}
+// {/*        },*/}
+// {/*        performance: {*/}
+// {/*          server: true,*/}
+// {/*        },*/}
+// {/*        pv: true,*/}
+// {/*        error: true,*/}
+// {/*      });*/}
+// {/*    }*/}
+// {/*  }}*/}
+// {/*/>*/}

@@ -1,6 +1,12 @@
 import classNames from 'classnames';
 import Link from 'next/link';
-import React from 'react';
+import { useRouter } from 'next/router';
+import React, { useEffect } from 'react';
+import { useRecoilState } from 'recoil';
+
+import { userInfoState } from '@/store/userInfo';
+
+import service from '@/lib/http';
 
 type TOP_BAR_PROPS = {
   layoutColorMode: string;
@@ -12,6 +18,20 @@ type TOP_BAR_PROPS = {
 
 //顶部栏
 export const AppTopbar = (props: TOP_BAR_PROPS) => {
+  const [userInfo] = useRecoilState(userInfoState);
+  const [, setUserInfo] = useRecoilState(userInfoState);
+  const router = useRouter();
+
+  useEffect(() => {
+    getInfo();
+  }, []);
+
+  const getInfo = async () => {
+    const { data } = await service.get('/api/v1/getinfo');
+    data.code === 401 && router.push('/login');
+    setUserInfo(data.data);
+  };
+
   return (
     <div className='layout-topbar'>
       <Link href='/'>
@@ -73,6 +93,7 @@ export const AppTopbar = (props: TOP_BAR_PROPS) => {
             onClick={props.onMobileSubTopbarMenuClick}
           >
             <i className='pi pi-user' />
+            <span>{JSON.stringify(userInfo)}</span>
             <span>配置</span>
           </button>
         </li>

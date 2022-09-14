@@ -4,17 +4,17 @@ import React, { useRef } from 'react';
 import { getLayout } from '@/components/layout/Layout';
 import Seo from '@/components/Seo';
 
-const Visualization = () => {
+const OperationalAnalysis = () => {
   const toast = useRef<Toast>(null);
 
   return (
     <>
-      <Seo templateTitle='可视化' />
+      <Seo templateTitle='运营分析' />
       <div className='table-responsive  subpixel-antialiased'>
         <div className='card '>
           <Toast ref={toast} />
           <div>
-            <h1>可视化</h1>
+            <h1>运营分析</h1>
           </div>
         </div>
       </div>
@@ -22,6 +22,6 @@ const Visualization = () => {
   );
 };
 
-Visualization.getLayout = getLayout;
+OperationalAnalysis.getLayout = getLayout;
 
-export default Visualization;
+export default OperationalAnalysis;

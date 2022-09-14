@@ -1,8 +1,8 @@
+import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import useSWR from 'swr';
 
-import fetchJson from '@/lib/fetchJson';
 import { User } from '@/pages/api/auth/user';
 
 export default function useUser({
@@ -12,7 +12,7 @@ export default function useUser({
   const router = useRouter();
   const { data: user, mutate: mutateUser } = useSWR<User>(
     '/api/auth/user',
-    fetchJson
+    axios.post
   );
 
   useEffect(() => {
