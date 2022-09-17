@@ -4,9 +4,9 @@
       "key": "1.1",
       "data": {
         "id": "1.1",
-        "executor": "马芳",
-        "missionName": "断三联经",
-        "department": "华南",
+        "executor": "毕永军",
+        "missionName": "汇报并决策是否接受演练",
+        "department": "信息科技部",
         "startingTime": "2022-08-25 12:01:10",
         "endTime": "2022-08-25 12:09:32",
         "status": "已完成"
@@ -16,9 +16,9 @@
           "key": "1.1.1",
           "data": {
             "id": "1.1.1",
-            "executor": "孔杰",
-            "missionName": "气是义",
-            "department": "华南",
+            "executor": "毕永军",
+            "missionName": "通知上报",
+            "department": "信息科技部",
             "startingTime": "2022-08-25 12:01:10",
             "endTime": "2022-08-25 12:03:58",
             "status": "已完成"
@@ -28,9 +28,9 @@
           "key": "1.1.2",
           "data": {
             "id": "1.1.2",
-            "executor": "卢超",
-            "missionName": "每周来化连",
-            "department": "华南",
+            "executor": "吕晓强",
+            "missionName": "上报演练",
+            "department": "信息科技部",
             "startingTime": "2022-08-25 12:04:44",
             "endTime": "2022-08-25 12:09:32",
             "status": "已完成"
@@ -42,9 +42,9 @@
       "key": "1.2",
       "data": {
         "id": "1.2",
-        "executor": "孟杰",
-        "missionName": "精些界",
-        "department": "西南",
+        "executor": "毕永军",
+        "missionName": "通知相关人员并进行系统准备与公告发布",
+        "department": "信息科技部",
         "startingTime": "2022-08-25 12:10:57",
         "endTime": "2022-08-25 12:18:34",
         "status": "已完成"
@@ -54,9 +54,9 @@
           "key": "1.2.1",
           "data": {
             "id": "1.2.1",
-            "executor": "姚磊",
-            "missionName": "西书天地下结得",
-            "department": "西南",
+            "executor": "彭真山",
+            "missionName": "通知人员",
+            "department": "信息科技部",
             "startingTime": "2022-08-25 12:10:57",
             "endTime": "2022-08-25 12:11:30",
             "status": "已完成"
@@ -66,9 +66,9 @@
           "key": "1.2.2",
           "data": {
             "id": "1.2.2",
-            "executor": "许磊",
-            "missionName": "情果又号选",
-            "department": "西南",
+            "executor": "陆新宇",
+            "missionName": "调度人员确认",
+            "department": "人行接口组",
             "startingTime": "2022-08-25 12:11:33",
             "endTime": "2022-08-25 12:12:28",
             "status": "已完成"
@@ -78,9 +78,9 @@
           "key": "1.2.3",
           "data": {
             "id": "1.2.3",
-            "executor": "林明",
-            "missionName": "样运信战设率持",
-            "department": "西南",
+            "executor": "毕永军",
+            "missionName": "通知人员",
+            "department": "一线协调组",
             "startingTime": "2022-08-25 12:13:59",
             "endTime": "2022-08-25 12:15:37",
             "status": "已完成"
@@ -89,225 +89,39 @@
       ]
     },
     {
-      "key": "1.3",
-      "data": {
-        "id": "1.3",
-        "executor": "袁秀英",
-        "missionName": "流算且认已",
-        "department": "华北",
-        "startingTime": "2022-08-25 12:20:33",
-        "endTime": "2022-08-25 12:30:15",
-        "status": "已完成"
-      },
-      "children": [
-        {
-          "key": "1.3.1",
-          "data": {
-            "id": "1.3.1",
-            "executor": "贺军",
-            "missionName": "心好有维",
-            "department": "华北",
-            "startingTime": "2022-08-25 12:20:33",
-            "endTime": "2022-08-25 12:21:49",
-            "status": "已完成"
-          }
-        },
-        {
-          "key": "1.3.2",
-          "data": {
-            "id": "1.3.2",
-            "executor": "王军",
-            "missionName": "做为利命据石",
-            "department": "华北",
-            "startingTime": "2022-08-25 12:25:12",
-            "endTime": "2022-08-25 12:26:21",
-            "status": "已完成"
-          }
-        },
-        {
-          "key": "1.3.3",
-          "data": {
-            "id": "1.3.3",
-            "executor": "张超",
-            "missionName": "安想意县求到设",
-            "department": "华北",
-            "startingTime": "2022-08-25 12:27:31",
-            "endTime": "2022-08-25 12:28:52",
-            "status": "已完成"
-          }
-        },
-        {
-          "key": "1.3.4",
-          "data": {
-            "id": "1.3.4",
-            "executor": "黎娟",
-            "missionName": "何保段外但",
-            "department": "华北",
-            "startingTime": "2022-08-25 12:29:04",
-            "endTime": "2022-08-25 12:30:15",
-            "status": "已完成"
-          }
-        }
-      ]
-    },
-    {
-      "key": "1.4",
-      "data": {
-        "id": "1.4",
-        "executor": "贺静",
-        "missionName": "内约算积速",
-        "department": "西南",
-        "startingTime": "2022-08-25 12:31:09",
-        "endTime": "2022-08-25 12:40:12",
-        "status": "已完成"
-      },
-      "children": [
-        {
-          "key": "1.4.1",
-          "data": {
-            "id": "1.4.1",
-            "executor": "秦平",
-            "missionName": "数万格象情能中",
-            "department": "西南",
-            "startingTime": "2022-08-25 12:31:09",
-            "endTime": "2022-08-25 12:34:02",
-            "status": "已完成"
-          }
-        },
-        {
-          "key": "1.4.2",
-          "data": {
-            "id": "1.4.2",
-            "executor": "姜刚",
-            "missionName": "山斯来今",
-            "department": "西南",
-            "startingTime": "2022-08-25 12:35:33",
-            "endTime": "2022-08-25 12:40:12",
-            "status": "已完成"
-          }
-        }
-      ]
-    },
-    {
-      "key": "1.5",
-      "data": {
-        "id": "1.5",
-        "executor": "陈平",
-        "missionName": "备任状往重还影",
-        "department": "华南",
-        "startingTime": "2022-08-25 12:41:02",
-        "endTime": "2022-08-25 12:49:08",
-        "status": "已完成"
-      }
-    },
-    {
-      "key": "1.6",
-      "data": {
-        "id": "1.6",
-        "executor": "钱秀兰",
-        "missionName": "按着况党东",
-        "department": "华南",
-        "startingTime": "2022-08-25 12:50:54",
-        "endTime": "2022-08-25 12:56:43",
-        "status": "已完成"
-      },
-      "children": [
-        {
-          "key": "1.6.1",
-          "data": {
-            "id": "1.6.1",
-            "executor": "范秀兰",
-            "missionName": "制何取北克并",
-            "department": "华南",
-            "startingTime": "2022-08-25 12:50:54",
-            "endTime": "2022-08-25 12:52:12",
-            "status": "已完成"
-          }
-        },
-        {
-          "key": "1.6.2",
-          "data": {
-            "id": "1.6.2",
-            "executor": "郝秀英",
-            "missionName": "习结除称车",
-            "department": "华南",
-            "startingTime": "2022-08-25 12:53:20",
-            "endTime": "2022-08-25 12:56:43",
-            "status": "已完成"
-          }
-        }
-      ]
-    },
-    {
-      "key": "1.7",
-      "data": {
-        "id": "1.7",
-        "executor": "叶勇",
-        "missionName": "西你断级",
-        "department": "华南",
-        "startingTime": "2022-08-25 12:57:11",
-        "endTime": "2022-08-25 12:59:48",
-        "status": "已完成"
-      }
-    },
-    {
       "key": "2.1",
       "data": {
         "id": "2.1",
-        "executor": "林秀兰",
-        "missionName": "斗身即参",
-        "department": "华北",
+        "executor": "彭真山",
+        "missionName": "切换正式开始",
+        "department": "信息科技部",
         "startingTime": "2022-08-25 13:01:36",
-        "endTime": "2022-08-25 13:20:36",
-        "status": "已完成"
+        "endTime": "",
+        "status": "进行中"
       },
       "children": [
         {
           "key": "2.1.1",
           "data": {
             "id": "2.1.1",
-            "executor": "林秀英",
-            "missionName": "式向类包开",
-            "department": "华北",
+            "executor": "吕晓强",
+            "missionName": "启动演练",
+            "department": "信息科技部",
             "startingTime": "2022-08-25 13:01:36",
-            "endTime": "2022-08-25 13:05:16",
-            "status": "已完成"
+            "endTime": "",
+            "status": "进行中"
           }
         },
         {
           "key": "2.1.2",
           "data": {
             "id": "2.1.2",
-            "executor": "尹娜",
-            "missionName": "几按只关",
-            "department": "华北",
+            "executor": "彭真山",
+            "missionName": "启动演练",
+            "department": "信息科技部",
             "startingTime": "2022-08-25 13:07:14",
-            "endTime": "2022-08-25 13:08:16",
-            "status": "已完成"
-          }
-        },
-        {
-          "key": "2.1.3",
-          "data": {
-            "id": "2.1.3",
-            "executor": "高洋",
-            "missionName": "把院满",
-            "department": "华北",
-            "startingTime": "2022-08-25 13:12:59",
-            "endTime": "2022-08-25 13:15:07",
-            "status": "已完成"
-          }
-        },
-        {
-          "key": "2.1.4",
-          "data": {
-            "id": "2.1.4",
-            "executor": "白霞",
-            "missionName": "必支议并",
-            "department": "华北",
-            "startingTime": "2022-08-25 13:17:39",
-            "endTime": "2022-08-25 13:20:36",
-            "status": "已完成"
+            "endTime": "",
+            "status": "进行中"
           }
         }
       ]
@@ -316,60 +130,60 @@
       "key": "2.2",
       "data": {
         "id": "2.2",
-        "executor": "周涛",
-        "missionName": "成风林力么办",
-        "department": "华北",
+        "executor": "毕永军",
+        "missionName": "启动灾备自动化切换流程，进行同城切换",
+        "department": "信息科技部",
         "startingTime": "2022-08-25 13:21:13",
-        "endTime": "2022-08-25 13:40:21",
-        "status": "已完成"
+        "endTime": "",
+        "status": "进行中"
       }
     },
     {
       "key": "2.3",
       "data": {
         "id": "2.3",
-        "executor": "萧伟",
-        "missionName": "格见律段",
-        "department": "西南",
+        "executor": "彭真山",
+        "missionName": "启动业务验证",
+        "department": "信息科技部",
         "startingTime": "2022-08-25 13:41:48",
-        "endTime": "2022-08-25 13:57:52",
-        "status": "已完成"
+        "endTime": "",
+        "status": "进行中"
       },
       "children": [
         {
           "key": "2.3.1",
           "data": {
             "id": "2.3.1",
-            "executor": "黄敏",
-            "missionName": "命当切",
-            "department": "西南",
+            "executor": "彭真山",
+            "missionName": "切换确认",
+            "department": "信息科技部",
             "startingTime": "2022-08-25 13:41:48",
-            "endTime": "2022-08-25 13:44:04",
-            "status": "已完成"
+            "endTime": "",
+            "status": "进行中"
           }
         },
         {
           "key": "2.3.2",
           "data": {
             "id": "2.3.2",
-            "executor": "汪芳",
-            "missionName": "听领速带即",
-            "department": "西南",
+            "executor": "肖潇",
+            "missionName": "业务验证",
+            "department": "运营管理部",
             "startingTime": "2022-08-25 13:48:54",
-            "endTime": "2022-08-25 13:50:26",
-            "status": "已完成"
+            "endTime": "",
+            "status": "进行中"
           }
         },
         {
           "key": "2.3.3",
           "data": {
             "id": "2.3.3",
-            "executor": "唐霞",
-            "missionName": "天意事矿再",
-            "department": "西南",
+            "executor": "崔宇程",
+            "missionName": "业务验证",
+            "department": "网络金融部",
             "startingTime": "2022-08-25 13:53:46",
-            "endTime": "2022-08-25 13:57:52",
-            "status": "已完成"
+            "endTime": "",
+            "status": "进行中"
           }
         }
       ]
@@ -378,421 +192,73 @@
       "key": "3.1",
       "data": {
         "id": "3.1",
-        "executor": "崔杰",
-        "missionName": "张知两是",
-        "department": "华中",
-        "startingTime": "2022-08-25 14:01:37",
-        "endTime": "2022-08-25 14:10:47",
-        "status": "已完成"
+        "executor": "吕晓强",
+        "missionName": "切换确认",
+        "department": "信息科技部",
+        "startingTime": "",
+        "endTime": "",
+        "status": "未开始"
       }
     },
     {
       "key": "3.2",
       "data": {
         "id": "3.2",
-        "executor": "常芳",
-        "missionName": "广除体组京十文",
-        "department": "华中",
-        "startingTime": "2022-08-25 14:11:12",
-        "endTime": "2022-08-25 14:20:29",
-        "status": "已完成"
+        "executor": "毕永军",
+        "missionName": "系统恢复",
+        "department": "信息科技部",
+        "startingTime": "",
+        "endTime": "",
+        "status": "未开始"
       }
     },
     {
       "key": "3.3",
       "data": {
         "id": "3.3",
-        "executor": "蒋秀英",
-        "missionName": "果展层科装",
-        "department": "华中",
-        "startingTime": "2022-08-25 14:21:34",
-        "endTime": "2022-08-25 14:30:19",
-        "status": "已完成"
-      },
-      "children": [
-        {
-          "key": "3.3.1",
-          "data": {
-            "id": "3.3.1",
-            "executor": "白强",
-            "missionName": "对建写采数每",
-            "department": "华中",
-            "startingTime": "2022-08-25 14:21:34",
-            "endTime": "2022-08-25 14:25:49",
-            "status": "已完成"
-          }
-        },
-        {
-          "key": "3.3.2",
-          "data": {
-            "id": "3.3.2",
-            "executor": "白强",
-            "missionName": "面设你程",
-            "department": "华中",
-            "startingTime": "2022-08-25 14:28:10",
-            "endTime": "2022-08-25 14:30:19",
-            "status": "已完成"
-          }
-        }
-      ]
+        "executor": "李凡",
+        "missionName": "系统恢复",
+        "department": "数据管理部",
+        "startingTime": "",
+        "endTime": "",
+        "status": "未开始"
+      }
     },
     {
       "key": "3.4",
       "data": {
         "id": "3.4",
-        "executor": "金艳",
-        "missionName": "据办员报",
-        "department": "华北",
-        "startingTime": "2022-08-25 14:31:23",
-        "endTime": "2022-08-25 14:40:49",
-        "status": "已完成"
+        "executor": "肖潇",
+        "missionName": "业务检查",
+        "department": "运营管理部",
+        "startingTime": "",
+        "endTime": "",
+        "status": "未开始"
       }
     },
     {
       "key": "3.5",
       "data": {
         "id": "3.5",
-        "executor": "白强",
-        "missionName": "间七九",
-        "department": "华南",
-        "startingTime": "2022-08-25 14:41:57",
-        "endTime": "2022-08-25 14:50:15",
-        "status": "已完成"
-      },
-      "children": [
-        {
-          "key": "3.5.1",
-          "data": {
-            "id": "3.5.1",
-            "executor": "许桂英",
-            "missionName": "张及合九治活",
-            "department": "华南",
-            "startingTime": "2022-08-25 14:41:57",
-            "endTime": "2022-08-25 14:43:15",
-            "status": "已完成"
-          }
-        },
-        {
-          "key": "3.5.2",
-          "data": {
-            "id": "3.5.2",
-            "executor": "曾军",
-            "missionName": "石题会声四",
-            "department": "华南",
-            "startingTime": "2022-08-25 14:44:01",
-            "endTime": "2022-08-25 14:46:41",
-            "status": "已完成"
-          }
-        },
-        {
-          "key": "3.5.3",
-          "data": {
-            "id": "3.5.3",
-            "executor": "杜洋",
-            "missionName": "大据万连家",
-            "department": "华南",
-            "startingTime": "2022-08-25 14:47:48",
-            "endTime": "2022-08-25 14:48:11",
-            "status": "已完成"
-          }
-        },
-        {
-          "key": "3.5.4",
-          "data": {
-            "id": "3.5.4",
-            "executor": "孟平",
-            "missionName": "常老近",
-            "department": "华南",
-            "startingTime": "2022-08-25 14:49:10",
-            "endTime": "2022-08-25 14:50:15",
-            "status": "已完成"
-          }
-        }
-      ]
+        "executor": "吴泽俊",
+        "missionName": "业务检查",
+        "department": "个人金融部",
+        "startingTime": "",
+        "endTime": "",
+        "status": "未开始"
+      }
     },
     {
       "key": "3.6",
       "data": {
         "id": "3.6",
-        "executor": "陈娟",
-        "missionName": "八清量他",
-        "department": "华中",
-        "startingTime": "2022-08-25 14:50:23",
-        "endTime": "2022-08-25 14:59:33",
-        "status": "已完成"
-      },
-      "children": [
-        {
-          "key": "3.6.1",
-          "data": {
-            "id": "3.6.1",
-            "executor": "孟平",
-            "missionName": "厂往东社院",
-            "department": "华中",
-            "startingTime": "2022-08-25 14:50:23",
-            "endTime": "2022-08-25 14:54:19",
-            "status": "已完成"
-          }
-        },
-        {
-          "key": "3.6.2",
-          "data": {
-            "id": "3.6.2",
-            "executor": "曾明",
-            "missionName": "建起府身",
-            "department": "华中",
-            "startingTime": "2022-08-25 14:55:47",
-            "endTime": "2022-08-25 14:59:33",
-            "status": "已完成"
-          }
-        }
-      ]
-    },
-    {
-      "key": "4.1",
-      "data": {
-        "id": "4.1",
-        "executor": "孟平",
-        "missionName": "备可小机持",
-        "department": "华东",
-        "startingTime": "2022-08-25 15:01:17",
-        "endTime": "",
-        "status": "进行中"
-      }
-    },
-    {
-      "key": "4.2",
-      "data": {
-        "id": "4.2",
-        "executor": "董娟",
-        "missionName": "装提元较手",
-        "department": "华南",
-        "startingTime": "2022-08-25 15:14:53",
-        "endTime": "",
-        "status": "进行中"
-      }
-    },
-    {
-      "key": "4.3",
-      "data": {
-        "id": "4.3",
-        "executor": "蔡强",
-        "missionName": "根达走据要",
-        "department": "西南",
-        "startingTime": "2022-08-25 15:32:30",
-        "endTime": "",
-        "status": "进行中"
-      }
-    },
-    {
-      "key": "4.4",
-      "data": {
-        "id": "4.4",
-        "executor": "贾刚",
-        "missionName": "学等就",
-        "department": "华南",
-        "startingTime": "2022-08-25 15:46:53",
-        "endTime": "",
-        "status": "进行中"
-      }
-    },
-    {
-      "key": "5.1",
-      "data": {
-        "id": "5.1",
-        "executor": "朱霞",
-        "missionName": "本于节解往每",
-        "department": "华南",
-        "startingTime": "2022-08-25 16:02:43",
+        "executor": "崔宇程",
+        "missionName": "业务检查",
+        "department": "网络金融部",
+        "startingTime": "",
         "endTime": "",
         "status": "未开始"
       }
-    },
-    {
-      "key": "5.2",
-      "data": {
-        "id": "5.2",
-        "executor": "白强",
-        "missionName": "间七九",
-        "department": "华南",
-        "startingTime": "2022-08-25 16:16:57",
-        "endTime": "",
-        "status": "未开始"
-      }
-    },
-    {
-      "key": "5.3",
-      "data": {
-        "id": "5.3",
-        "executor": "谭勇",
-        "missionName": "毛治间合",
-        "department": "华北",
-        "startingTime": "2022-08-25 16:32:59",
-        "endTime": "",
-        "status": "未开始"
-      },
-      "children": [
-        {
-          "key": "5.3.1",
-          "data": {
-            "id": "5.3.1",
-            "executor": "许杰",
-            "missionName": "工认转习再住",
-            "department": "华北",
-            "startingTime": "2022-08-25 16:32:59",
-            "endTime": "",
-            "status": "未开始"
-          }
-        },
-        {
-          "key": "5.3.2",
-          "data": {
-            "id": "5.3.2",
-            "executor": "冯勇",
-            "missionName": "个其老便起",
-            "department": "华北",
-            "startingTime": "2022-08-25 16:42:13",
-            "endTime": "",
-            "status": "未开始"
-          }
-        },
-        {
-          "key": "5.3.3",
-          "data": {
-            "id": "5.3.3",
-            "executor": "孟平",
-            "missionName": "其生专问派养",
-            "department": "华北",
-            "startingTime": "2022-08-25 16:50:00",
-            "endTime": "",
-            "status": "未开始"
-          }
-        }
-      ]
-    },
-    {
-      "key": "6.1",
-      "data": {
-        "id": "6.1",
-        "executor": "孟磊",
-        "missionName": "分我不走为派当",
-        "department": "华南",
-        "startingTime": "2022-08-25 17:09:51",
-        "endTime": "",
-        "status": "未开始"
-      },
-      "children": [
-        {
-          "key": "6.1.1",
-          "data": {
-            "id": "6.1.1",
-            "executor": "许桂英",
-            "missionName": "张及合九治活",
-            "department": "华南",
-            "startingTime": "2022-08-25 17:09:51",
-            "endTime": "",
-            "status": "未开始"
-          }
-        },
-        {
-          "key": "6.1.2",
-          "data": {
-            "id": "6.1.2",
-            "executor": "曾军",
-            "missionName": "石题会声四",
-            "department": "华南",
-            "startingTime": "2022-08-25 17:19:01",
-            "endTime": "",
-            "status": "未开始"
-          }
-        },
-        {
-          "key": "6.1.3",
-          "data": {
-            "id": "6.1.3",
-            "executor": "杜洋",
-            "missionName": "大据万连家",
-            "department": "华南",
-            "startingTime": "2022-08-25 17:23:48",
-            "endTime": "",
-            "status": "未开始"
-          }
-        },
-        {
-          "key": "6.1.4",
-          "data": {
-            "id": "6.1.4",
-            "executor": "孟平",
-            "missionName": "常老近",
-            "department": "华南",
-            "startingTime": "2022-08-25 17:29:10",
-            "endTime": "",
-            "status": "未开始"
-          }
-        }
-      ]
-    },
-    {
-      "key": "6.2",
-      "data": {
-        "id": "6.2",
-        "executor": "顾勇",
-        "missionName": "场速实影万大万",
-        "department": "华北",
-        "startingTime": "2022-08-25 17:35:18",
-        "endTime": "",
-        "status": "未开始"
-      },
-      "children": [
-        {
-          "key": "6.2.1",
-          "data": {
-            "id": "6.2.1",
-            "executor": "任磊",
-            "missionName": "下队县且技",
-            "department": "华北",
-            "startingTime": "2022-08-25 17:35:18",
-            "endTime": "",
-            "status": "未开始"
-          }
-        },
-        {
-          "key": "6.2.2",
-          "data": {
-            "id": "6.2.2",
-            "executor": "余桂英",
-            "missionName": "斯较西",
-            "department": "华北",
-            "startingTime": "2022-08-25 17:45:15",
-            "endTime": "",
-            "status": "未开始"
-          }
-        },
-        {
-          "key": "6.2.3",
-          "data": {
-            "id": "6.2.3",
-            "executor": "孟平",
-            "missionName": "通工力命划式",
-            "department": "华北",
-            "startingTime": "2022-08-25 17:49:40",
-            "endTime": "",
-            "status": "未开始"
-          }
-        },
-        {
-          "key": "6.2.4",
-          "data": {
-            "id": "6.2.4",
-            "executor": "崔刚",
-            "missionName": "展研王采",
-            "department": "华北",
-            "startingTime": "2022-08-25 17:51:18",
-            "endTime": "",
-            "status": "未开始"
-          }
-        }
-      ]
     }
   ]
 }
