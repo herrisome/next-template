@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { Button } from 'primereact/button';
-import { Card, CardTemplateTypes } from 'primereact/card';
+import { Card } from 'primereact/card';
 import { ProgressBar } from 'primereact/progressbar';
 import { Toast } from 'primereact/toast';
 import React, { useRef, useState } from 'react';
@@ -14,31 +14,7 @@ const ProcessScheduling = () => {
   const [data] = useState<SCHEDULING_ITEM[]>(list.data);
   const toast = useRef<Toast>(null);
   const router = useRouter();
-  const header = (
-    <img
-      alt='Card'
-      src='https://user-images.githubusercontent.com/44428735/188424944-5fc4afea-f2fb-4191-a916-85830c289870.png'
-      className='h-60 w-full'
-    />
-  );
-  const footer = (e: { title: string }) => {
-    return (
-      <span className='flex items-center justify-end'>
-        <Button
-          label='调度'
-          icon='pi pi-sync'
-          onClick={() => {
-            router.push(`/scheduling-management/${e.title}`);
-          }}
-        />
-        <Button
-          label='可视化'
-          icon='pi pi-tablet'
-          className='p-button-secondary ml-2'
-        />
-      </span>
-    );
-  };
+  // const header = ;
 
   return (
     <>
@@ -46,14 +22,34 @@ const ProcessScheduling = () => {
       <div className='table-responsive  subpixel-antialiased'>
         <div className='grid grid-cols-1 gap-4 md:grid-cols-4'>
           <Toast ref={toast} />
-          {data.map((e) => (
+          {data.reverse().map((e) => (
             <div key={e.id}>
               <Card
                 className='overflow-hidden'
                 title={e.missionName}
                 subTitle={e.executionDate}
-                footer={footer as CardTemplateTypes}
-                header={header}
+                footer={() => (
+                  <span className='flex items-center justify-end'>
+                    <Button
+                      label='调度'
+                      icon='pi pi-sync'
+                      onClick={() => {
+                        router.push(`/scheduling-management/${e.missionName}`);
+                      }}
+                    />
+                    <Button
+                      label='可视化'
+                      icon='pi pi-tablet'
+                      className='p-button-secondary ml-2'
+                      onClick={() => {
+                        window.open(e.url);
+                      }}
+                    />
+                  </span>
+                )}
+                header={() => (
+                  <img alt='Card' src={e.img} className='h-60 w-full' />
+                )}
               >
                 <ProgressBar
                   className='bg-gray-200'

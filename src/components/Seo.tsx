@@ -3,9 +3,9 @@ import { useRouter } from 'next/router';
 import * as React from 'react';
 
 const defaultMeta = {
-  title: '统一调度平台',
-  siteName: '统一调度平台',
-  description: '统一调度平台',
+  title: '生产调度平台',
+  siteName: '生产调度平台',
+  description: '生产调度平台',
   url: '',
   type: 'website',
   robots: 'follow, index',

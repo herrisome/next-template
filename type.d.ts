@@ -76,6 +76,8 @@ type SCHEDULING_ITEM = {
   questionList: string;
   missionProgress: string;
   missionStatus: string;
+  img?: string;
+  url?: string;
 };
 
 type MENU = {

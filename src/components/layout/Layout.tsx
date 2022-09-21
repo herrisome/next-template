@@ -11,7 +11,7 @@ import { AppTopbar } from '@/components/layout/AppTopbar';
 
 const menu: MENU[] = [
   {
-    label: '统一调度',
+    label: '生产调度',
     items: [
       {
         label: '仪表盘',
@@ -22,11 +22,6 @@ const menu: MENU[] = [
         label: '流程调度',
         icon: 'pi pi-fw pi-sync',
         to: '/scheduling-management',
-      },
-      {
-        label: '可视化',
-        icon: 'pi pi-fw pi-tablet',
-        to: '/visualization',
       },
     ],
   },

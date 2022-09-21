@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { Button } from 'primereact/button';
 import { Column } from 'primereact/column';
+import { ContextMenu } from 'primereact/contextmenu';
 import { DataTable } from 'primereact/datatable';
 import { InputText } from 'primereact/inputtext';
 import { Toast } from 'primereact/toast';
@@ -10,12 +11,15 @@ import { TreeTable, TreeTableSelectionKeysType } from 'primereact/treetable';
 import React, { useRef, useState } from 'react';
 
 import { getLayout } from '@/components/layout/Layout';
+import Seo from '@/components/Seo';
 import StatusBadge from '@/components/StatusBadge';
 
 import list from '@/assets/LIST_DATA.json';
 
 const Id = () => {
-  const [steps] = useState<LIST_ITEM[]>(list.data as unknown as LIST_ITEM[]);
+  const [steps, setStep] = useState<LIST_ITEM[]>(
+    list.data as unknown as LIST_ITEM[]
+  );
   const [selectedNodekey, setSelectedNodekey] =
     useState<TreeTableSelectionKeysType | null>(null);
   const [globalFilter, setGlobalFilter] = useState('');
@@ -25,6 +29,43 @@ const Id = () => {
   const exportCSV = () => {
     (dt.current as DataTable).exportCSV();
   };
+  const cm = useRef(null);
+  const items = [
+    {
+      label: '问题',
+      icon: 'pi pi-fw pi-file',
+      items: [
+        {
+          label: '快速新增',
+          icon: 'pi pi-fw pi-plus',
+        },
+        {
+          label: '查看已有',
+          icon: 'pi pi-fw pi-trash',
+        },
+        {
+          separator: true,
+        },
+      ],
+    },
+    {
+      separator: true,
+    },
+    {
+      label: '退出',
+      icon: 'pi pi-fw pi-power-off',
+    },
+  ];
+
+  const onInputChange = (e: string, name: string, arr: LIST_ITEM) => {
+    const _step = JSON.parse(JSON.stringify(steps));
+    const index = _step.findIndex(
+      (item: { key: string }) => item.key === arr.key
+    );
+    _step[index].data[name] = e;
+    setStep(_step);
+  };
+
   //左操作栏
   const leftToolbarTemplate = () => {
     return (
@@ -86,23 +127,18 @@ const Id = () => {
                 detail: '调度成功',
                 life: 3000,
               });
+              onInputChange('进行中', 'status', rowData);
             });
           }}
         />
-        <Button
-          icon='pi pi-stop'
-          className='p-button-rounded p-button-warning mr-2'
-          onClick={() => {
-            axios.post('/api/postPersonalSchedulingCall').then(() => {
-              toast.current?.show({
-                severity: 'success',
-                summary: '成功',
-                detail: '通知成功',
-                life: 3000,
-              });
-            });
-          }}
-        />
+        {rowData.data.status !== '未开始' &&
+          rowData.data.status !== '已完成' && (
+            <Button
+              icon='pi pi-stop'
+              className='p-button-rounded p-button-warning mr-2'
+              onClick={() => onInputChange('未开始', 'status', rowData)}
+            />
+          )}
         <Button
           icon='pi pi-phone'
           className='p-button-rounded p-button-danger mr-2'
@@ -140,81 +176,92 @@ const Id = () => {
   );
 
   return (
-    <div className='table-responsive'>
-      <div className='card '>
-        <Toast ref={toast} />
-        <Toolbar
-          className='mb-4'
-          right={rightToolbarTemplate}
-          left={leftToolbarTemplate}
-        />
-
-        <TreeTable
-          header={header}
-          value={steps as TreeNode[]}
-          selectionMode='checkbox'
-          selectionKeys={selectedNodekey}
-          onSelectionChange={(e) => setSelectedNodekey(e.value)}
-          paginator
-          rows={10}
-          rowsPerPageOptions={[5, 10, 15, 20, 25]}
-          globalFilter={globalFilter}
-          className='md:text-lg'
+    <>
+      <Seo templateTitle='流程调度' />
+      <div className='table-responsive'>
+        <ContextMenu model={items} ref={cm}></ContextMenu>
+        <div
+          className='card '
+          onContextMenu={(e) =>
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            cm.current.show(e)
+          }
         >
-          <Column
-            field='id'
-            header='序号'
-            sortable
-            style={{ minWidth: '6rem' }}
-            expander
+          <Toast ref={toast} />
+          <Toolbar
+            className='mb-4'
+            right={rightToolbarTemplate}
+            left={leftToolbarTemplate}
           />
-          <Column
-            field='missionName'
-            header='任务名称'
-            sortable
-            style={{ minWidth: '14rem' }}
-          />
-          <Column
-            field='executor'
-            header='执行人'
-            sortable
-            style={{ minWidth: '8rem' }}
-          />
-          <Column
-            field='department'
-            header='部门'
-            headerClassName='sm-invisible'
-            bodyClassName='sm-invisible'
-            style={{ minWidth: '8rem' }}
-            sortable
-          />
-          <Column
-            field='startingTime'
-            header='开始时间'
-            sortable
-            headerClassName='sm-invisible'
-            bodyClassName='sm-invisible'
-            style={{ minWidth: '8rem' }}
-          />
-          <Column
-            field='endTime'
-            header='结束时间'
-            style={{ minWidth: '8rem' }}
-            sortable
-            headerClassName='sm-invisible'
-            bodyClassName='sm-invisible'
-          />
-          <Column
-            field='status'
-            header='状态'
-            body={StatusBadge}
-            style={{ minWidth: '8rem' }}
-            sortable
-          />
-          <Column body={actionBodyTemplate} style={{ minWidth: '30rem' }} />
-        </TreeTable>
+
+          <TreeTable
+            header={header}
+            value={steps as TreeNode[]}
+            selectionMode='checkbox'
+            selectionKeys={selectedNodekey}
+            onSelectionChange={(e) => setSelectedNodekey(e.value)}
+            paginator
+            rows={10}
+            rowsPerPageOptions={[5, 10, 15, 20, 25]}
+            globalFilter={globalFilter}
+            className='md:text-lg'
+          >
+            <Column
+              field='id'
+              header='序号'
+              sortable
+              style={{ minWidth: '6rem' }}
+              expander
+            />
+            <Column
+              field='missionName'
+              header='任务名称'
+              sortable
+              style={{ minWidth: '14rem' }}
+            />
+            <Column
+              field='executor'
+              header='执行人'
+              sortable
+              style={{ minWidth: '8rem' }}
+            />
+            <Column
+              field='department'
+              header='部门'
+              headerClassName='sm-invisible'
+              bodyClassName='sm-invisible'
+              style={{ minWidth: '8rem' }}
+              sortable
+            />
+            <Column
+              field='startingTime'
+              header='开始时间'
+              sortable
+              headerClassName='sm-invisible'
+              bodyClassName='sm-invisible'
+              style={{ minWidth: '8rem' }}
+            />
+            <Column
+              field='endTime'
+              header='结束时间'
+              style={{ minWidth: '8rem' }}
+              sortable
+              headerClassName='sm-invisible'
+              bodyClassName='sm-invisible'
+            />
+            <Column
+              field='status'
+              header='状态'
+              body={StatusBadge}
+              style={{ minWidth: '8rem' }}
+              sortable
+            />
+            <Column body={actionBodyTemplate} style={{ minWidth: '30rem' }} />
+          </TreeTable>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

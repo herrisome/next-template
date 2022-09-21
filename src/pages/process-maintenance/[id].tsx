@@ -24,7 +24,6 @@ import {
 import React, { useRef, useState } from 'react';
 
 import { getLayout } from '@/components/layout/Layout';
-import StatusBadge from '@/components/StatusBadge';
 
 import list from '@/assets/LIST_DATA.json';
 
@@ -504,13 +503,13 @@ const StepMaintenance = () => {
             headerClassName='sm-invisible'
             bodyClassName='sm-invisible'
           />
-          <Column
-            field='status'
-            header='状态'
-            body={StatusBadge}
-            style={{ minWidth: '6rem' }}
-            sortable
-          />
+          {/*<Column*/}
+          {/*  field='status'*/}
+          {/*  header='状态'*/}
+          {/*  body={StatusBadge}*/}
+          {/*  style={{ minWidth: '6rem' }}*/}
+          {/*  sortable*/}
+          {/*/>*/}
           <Column
             body={actionBodyTemplate}
             headerClassName='sm-invisible'
@@ -574,7 +573,13 @@ const StepMaintenance = () => {
             <label htmlFor='department'>部门</label>
             <Dropdown
               value={step.data.department}
-              options={['华北', '华南', '华中', '西南']}
+              options={[
+                '信息科技部',
+                '数据管理部',
+                '运营管理部',
+                '个人金融部',
+                '网络金融部',
+              ]}
               onChange={(e) => onInputChange(e, 'department')}
               placeholder='选择部门'
               valueTemplate={dropdownTemplate as DropdownValueTemplateType}

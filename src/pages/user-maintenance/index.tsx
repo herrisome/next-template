@@ -2,10 +2,11 @@ import axios from 'axios';
 import { Toast } from 'primereact/toast';
 import React, { useRef } from 'react';
 
+import ComingSoon from '@/components/ComingSoon';
 import { getLayout } from '@/components/layout/Layout';
 import Seo from '@/components/Seo';
 
-const UserMaintenance = (props: { login: object }) => {
+const UserMaintenance = () => {
   const toast = useRef<Toast>(null);
 
   return (
@@ -16,7 +17,7 @@ const UserMaintenance = (props: { login: object }) => {
           <Toast ref={toast} />
           <div>
             <h1>用户维护</h1>
-            <h1>{JSON.stringify(props.login)}</h1>
+            <ComingSoon />
           </div>
         </div>
       </div>

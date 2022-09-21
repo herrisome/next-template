@@ -1,6 +1,7 @@
 import { Toast } from 'primereact/toast';
 import React, { useRef } from 'react';
 
+import ComingSoon from '@/components/ComingSoon';
 import { getLayout } from '@/components/layout/Layout';
 import Seo from '@/components/Seo';
 
@@ -15,6 +16,7 @@ const AuthorityControl = () => {
           <Toast ref={toast} />
           <div>
             <h1>权限控制</h1>
+            <ComingSoon />
           </div>
         </div>
       </div>
