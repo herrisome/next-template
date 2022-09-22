@@ -1,4 +1,5 @@
 import axios from 'axios';
+import dayjs from 'dayjs';
 import { Button } from 'primereact/button';
 import { Column } from 'primereact/column';
 import { ContextMenu } from 'primereact/contextmenu';
@@ -9,17 +10,23 @@ import { Toolbar } from 'primereact/toolbar';
 import TreeNode from 'primereact/treenode';
 import { TreeTable, TreeTableSelectionKeysType } from 'primereact/treetable';
 import React, { useRef, useState } from 'react';
+import useSWR from 'swr';
 
 import { getLayout } from '@/components/layout/Layout';
 import Seo from '@/components/Seo';
 import StatusBadge from '@/components/StatusBadge';
 
 import list from '@/assets/LIST_DATA.json';
+import http from '@/lib/http';
+import service from '@/lib/http';
 
 const Id = () => {
   const [steps, setStep] = useState<LIST_ITEM[]>(
     list.data as unknown as LIST_ITEM[]
   );
+
+  const { data } = useSWR('/api/v1/schedule-list', http.get);
+
   const [selectedNodekey, setSelectedNodekey] =
     useState<TreeTableSelectionKeysType | null>(null);
   const [globalFilter, setGlobalFilter] = useState('');
@@ -106,6 +113,19 @@ const Id = () => {
     );
   };
 
+  const timeOfTemplate = (
+    rowDate: {
+      [x: string]: string | number | Date | dayjs.Dayjs | null | undefined;
+    },
+    e: { field: string | number }
+  ) => {
+    const date = dayjs(rowDate[e.field]);
+    const displayValue =
+      date.get('year') === 1 ? '' : date.format('YYYY-MM-DD HH:mm:ss');
+
+    return <>{displayValue}</>;
+  };
+
   // 操作按钮
   const actionBodyTemplate = (rowData: LIST_ITEM) => {
     return (
@@ -175,6 +195,10 @@ const Id = () => {
     </div>
   );
 
+  if (!data) {
+    return <div>loading...</div>;
+  }
+
   return (
     <>
       <Seo templateTitle='流程调度' />
@@ -197,7 +221,9 @@ const Id = () => {
 
           <TreeTable
             header={header}
-            value={steps as TreeNode[]}
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            value={data?.data?.data as TreeNode[]}
             selectionMode='checkbox'
             selectionKeys={selectedNodekey}
             onSelectionChange={(e) => setSelectedNodekey(e.value)}
@@ -208,26 +234,26 @@ const Id = () => {
             className='md:text-lg'
           >
             <Column
-              field='id'
+              field='stepNo'
               header='序号'
               sortable
               style={{ minWidth: '6rem' }}
               expander
             />
             <Column
-              field='missionName'
+              field='stepName'
               header='任务名称'
               sortable
               style={{ minWidth: '14rem' }}
             />
             <Column
-              field='executor'
+              field='dutyUserName'
               header='执行人'
               sortable
               style={{ minWidth: '8rem' }}
             />
             <Column
-              field='department'
+              field='dutyOrg'
               header='部门'
               headerClassName='sm-invisible'
               bodyClassName='sm-invisible'
@@ -235,18 +261,20 @@ const Id = () => {
               sortable
             />
             <Column
-              field='startingTime'
+              field='realStartTime'
               header='开始时间'
               sortable
+              body={timeOfTemplate}
               headerClassName='sm-invisible'
               bodyClassName='sm-invisible'
               style={{ minWidth: '8rem' }}
             />
             <Column
-              field='endTime'
+              field='realEndTime'
               header='结束时间'
               style={{ minWidth: '8rem' }}
               sortable
+              body={timeOfTemplate}
               headerClassName='sm-invisible'
               bodyClassName='sm-invisible'
             />
@@ -264,6 +292,16 @@ const Id = () => {
     </>
   );
 };
+
+export async function getServerSideProps() {
+  const { data } = await service.get(
+    '/api/v1/dict-data/option-select?dictType=schedule_task_status'
+  );
+
+  return {
+    props: { data }, // will be passed to the page component as props
+  };
+}
 
 Id.getLayout = getLayout;
 
