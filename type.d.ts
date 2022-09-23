@@ -49,7 +49,13 @@ interface LIST_ITEM {
   children?: LIST_ITEM[];
 }
 
-type LIST_ITEM_DATA = {
+interface LIST_ITEM_OLD {
+  key: string;
+  data: LIST_ITEM_DATA_OLD;
+  children?: LIST_ITEM_OLD[];
+}
+
+type LIST_ITEM_DATA_OLD = {
   id: string;
   executor: string;
   missionName: string;
@@ -57,6 +63,24 @@ type LIST_ITEM_DATA = {
   startingTime: string;
   endTime: string;
   status: string;
+};
+
+type LIST_ITEM_DATA = {
+  id: number;
+  step_no: string;
+  father_no: string;
+  step_name: string;
+  step_type: string;
+  duty_org: string;
+  duty_post: string;
+  duty_user: string;
+  duty_user_name: string;
+  state: string;
+  real_start_time: string;
+  real_end_time: string;
+  plan_end_time: string;
+  msg_send_time: string;
+  msg_call_time: string;
 };
 
 type CHART_ITEM = {

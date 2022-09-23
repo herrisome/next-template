@@ -3,7 +3,6 @@ import dayjs from 'dayjs';
 import { Button } from 'primereact/button';
 import { Column } from 'primereact/column';
 import { ContextMenu } from 'primereact/contextmenu';
-import { DataTable } from 'primereact/datatable';
 import { InputText } from 'primereact/inputtext';
 import { Toast } from 'primereact/toast';
 import { Toolbar } from 'primereact/toolbar';
@@ -16,26 +15,29 @@ import { getLayout } from '@/components/layout/Layout';
 import Seo from '@/components/Seo';
 import StatusBadge from '@/components/StatusBadge';
 
-import list from '@/assets/LIST_DATA.json';
 import http from '@/lib/http';
-import service from '@/lib/http';
+
+type SCHEDULE_DATA = { data: LIST_ITEM_DATA[] };
+type DICT_DATA = {
+  data: SCHEDULE_DATA;
+};
 
 const Id = () => {
-  const [steps, setStep] = useState<LIST_ITEM[]>(
-    list.data as unknown as LIST_ITEM[]
-  );
-
-  const { data } = useSWR('/api/v1/schedule-list', http.get);
+  //获取调度步骤信息
+  const { data } = useSWR<DICT_DATA>('/api/v1/schedule-list', http.get);
 
   const [selectedNodekey, setSelectedNodekey] =
     useState<TreeTableSelectionKeysType | null>(null);
+
   const [globalFilter, setGlobalFilter] = useState('');
-  const dt = useRef<DataTable>(null);
   const toast = useRef<Toast>(null);
-  //导出CSV
+
   const exportCSV = () => {
-    (dt.current as DataTable).exportCSV();
+    //TODO 导出CSV (dt.current as DataTable).exportCSV();
+    // const dt = useRef<DataTable>(null);
   };
+
+  //右键菜单
   const cm = useRef(null);
   const items = [
     {
@@ -64,13 +66,60 @@ const Id = () => {
     },
   ];
 
-  const onInputChange = (e: string, name: string, arr: LIST_ITEM) => {
-    const _step = JSON.parse(JSON.stringify(steps));
-    const index = _step.findIndex(
-      (item: { key: string }) => item.key === arr.key
-    );
-    _step[index].data[name] = e;
-    setStep(_step);
+  /**
+   * 开始调度
+   * @param arr
+   */
+  const startSchedule = (arr: LIST_ITEM) => {
+    const _step = JSON.parse(JSON.stringify(arr.data));
+
+    delete _step.createBy;
+    delete _step.createdAt;
+    delete _step.updateBy;
+    delete _step.updatedAt;
+
+    _step.realStartTime = dayjs().format('YYYY-MM-DD HH:mm:ss');
+    _step.state = '1';
+
+    //方法：消息通知
+    // axios.post('/api/postPersonalSchedulingMsg').then(() => {
+
+    http.put(`/api/v1/schedule-list/${_step.id}`, _step).then((res) => {
+      toast.current?.show({
+        severity: res.data.code === 200 ? 'success' : 'error',
+        summary: res.data.code === 200 ? '成功' : '失败',
+        detail: res.data.code === 200 ? '更新成功' : '更新失败',
+        life: 3000,
+      });
+    });
+  };
+
+  /**
+   * 停止调度
+   * @param arr
+   */
+  const stopSchedule = (arr: LIST_ITEM) => {
+    const _step = JSON.parse(JSON.stringify(arr.data));
+
+    //TODO 批量删除
+    delete _step.createBy;
+    delete _step.createdAt;
+    delete _step.updateBy;
+    delete _step.updatedAt;
+
+    _step.realStartTime = dayjs().format('YYYY-MM-DD HH:mm:ss');
+    _step.state = '0';
+
+    //TODO 消息撤回 /api/postPersonalSchedulingMsg
+
+    http.put(`/api/v1/schedule-list/${_step.id}`, _step).then((res) => {
+      toast.current?.show({
+        severity: res.data.code === 200 ? 'success' : 'error',
+        summary: res.data.code === 200 ? '成功' : '失败',
+        detail: res.data.code === 200 ? '更新成功' : '更新失败',
+        life: 3000,
+      });
+    });
   };
 
   //左操作栏
@@ -84,7 +133,7 @@ const Id = () => {
           disabled={
             !selectedNodekey || Object.keys(selectedNodekey).length === 0
           }
-          // onClick={openNew}
+          //TODO onClick={批量调度}
         />
         <Button
           label='批量通知'
@@ -93,10 +142,27 @@ const Id = () => {
           disabled={
             !selectedNodekey || Object.keys(selectedNodekey).length === 0
           }
-          // onClick={confirmDeleteSelected}
+          //TODO onClick={批量通知}
         />
       </span>
     );
+  };
+
+  /**
+   * 电话通知
+   * @constructor
+   */
+  const SchedulingCall = () => {
+    //TODO 根据执行人电话通知
+
+    axios.post('/api/postPersonalSchedulingCall').then(() => {
+      toast.current?.show({
+        severity: 'success',
+        summary: '成功',
+        detail: '已电话通知 ',
+        life: 3000,
+      });
+    });
   };
 
   // 右操作栏
@@ -104,7 +170,7 @@ const Id = () => {
     return (
       <>
         <Button
-          // label='导出'
+          label='导出'
           icon='pi pi-cloud-download'
           className='p-button-help p-button-sm'
           onClick={exportCSV}
@@ -113,65 +179,35 @@ const Id = () => {
     );
   };
 
-  const timeOfTemplate = (
-    rowDate: {
-      [x: string]: string | number | Date | dayjs.Dayjs | null | undefined;
-    },
-    e: { field: string | number }
-  ) => {
-    const date = dayjs(rowDate[e.field]);
-    const displayValue =
-      date.get('year') === 1 ? '' : date.format('YYYY-MM-DD HH:mm:ss');
-
-    return <>{displayValue}</>;
-  };
-
   // 操作按钮
   const actionBodyTemplate = (rowData: LIST_ITEM) => {
     return (
       <div className='actions'>
         <Button
-          icon={`pi ${
-            rowData.data.status !== '未开始' ? 'pi-replay' : 'pi-play'
-          }`}
+          icon={`pi ${rowData.data.state !== '0' ? 'pi-replay' : 'pi-play'}`}
           className={`p-button-rounded ${
-            rowData.data.status !== '未开始'
-              ? 'p-button-info'
-              : 'p-button-success'
+            rowData.data.state !== '0' ? 'p-button-info' : 'p-button-success'
           } mr-2`}
+          tooltip={`${rowData.data.state !== '0' ? '任务调度' : '重新发起'}`}
           onClick={() => {
-            axios.post('/api/postPersonalSchedulingMsg').then(() => {
-              toast.current?.show({
-                severity: 'success',
-                summary: '成功',
-                detail: '调度成功',
-                life: 3000,
-              });
-              onInputChange('进行中', 'status', rowData);
-            });
+            startSchedule(rowData);
+            //TODO 刷新数据
           }}
         />
-        {rowData.data.status !== '未开始' &&
-          rowData.data.status !== '已完成' && (
-            <Button
-              icon='pi pi-stop'
-              className='p-button-rounded p-button-warning mr-2'
-              onClick={() => onInputChange('未开始', 'status', rowData)}
-            />
-          )}
+        {rowData.data.state !== '0' && rowData.data.state !== '2' && (
+          <Button
+            icon='pi pi-stop'
+            className='p-button-rounded p-button-warning mr-2'
+            onClick={() => stopSchedule(rowData)}
+            tooltip='停止调度'
+          />
+        )}
         <Button
           icon='pi pi-phone'
           className='p-button-rounded p-button-danger mr-2'
-          onClick={() => {
-            axios.post('/api/postPersonalSchedulingCall').then(() => {
-              toast.current?.show({
-                severity: 'success',
-                summary: '成功',
-                detail: '已电话通知 ',
-                life: 3000,
-              });
-            });
-          }}
+          disabled={rowData.data.state === '0'}
+          tooltip='电话通知'
+          onClick={SchedulingCall}
         />
       </div>
     );
@@ -206,11 +242,7 @@ const Id = () => {
         <ContextMenu model={items} ref={cm}></ContextMenu>
         <div
           className='card '
-          onContextMenu={(e) =>
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            cm.current.show(e)
-          }
+          //TODO 增加右键功能 onContextMenu={(e) => cm.current.show(e)}
         >
           <Toast ref={toast} />
           <Toolbar
@@ -221,8 +253,6 @@ const Id = () => {
 
           <TreeTable
             header={header}
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
             value={data?.data?.data as TreeNode[]}
             selectionMode='checkbox'
             selectionKeys={selectedNodekey}
@@ -264,7 +294,6 @@ const Id = () => {
               field='realStartTime'
               header='开始时间'
               sortable
-              body={timeOfTemplate}
               headerClassName='sm-invisible'
               bodyClassName='sm-invisible'
               style={{ minWidth: '8rem' }}
@@ -274,12 +303,11 @@ const Id = () => {
               header='结束时间'
               style={{ minWidth: '8rem' }}
               sortable
-              body={timeOfTemplate}
               headerClassName='sm-invisible'
               bodyClassName='sm-invisible'
             />
             <Column
-              field='status'
+              field='state'
               header='状态'
               body={StatusBadge}
               style={{ minWidth: '8rem' }}
@@ -292,16 +320,6 @@ const Id = () => {
     </>
   );
 };
-
-export async function getServerSideProps() {
-  const { data } = await service.get(
-    '/api/v1/dict-data/option-select?dictType=schedule_task_status'
-  );
-
-  return {
-    props: { data }, // will be passed to the page component as props
-  };
-}
 
 Id.getLayout = getLayout;
 

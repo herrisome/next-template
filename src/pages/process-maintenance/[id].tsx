@@ -28,7 +28,7 @@ import { getLayout } from '@/components/layout/Layout';
 import list from '@/assets/LIST_DATA.json';
 
 const StepMaintenance = () => {
-  const emptySteps: LIST_ITEM = {
+  const emptySteps: LIST_ITEM_OLD = {
     key: '',
     data: {
       id: '',
@@ -41,15 +41,15 @@ const StepMaintenance = () => {
     },
   };
 
-  const [steps, setSteps] = useState<LIST_ITEM[]>(
-    list.data as unknown as LIST_ITEM[]
+  const [steps, setSteps] = useState<LIST_ITEM_OLD[]>(
+    list.data as unknown as LIST_ITEM_OLD[]
   );
   const [selectedNodekey, setSelectedNodekey] =
     useState<TreeTableSelectionKeysType | null>(null);
   const [stopDialog, setStopDialog] = useState(false);
   const [deleteStepDialog, setDeleteStepDialog] = useState(false);
   const [deleteStepsDialog, setDeleteStepsDialog] = useState(false);
-  const [step, setStep] = useState<LIST_ITEM>(emptySteps);
+  const [step, setStep] = useState<LIST_ITEM_OLD>(emptySteps);
   const [submitted, setSubmitted] = useState(false);
   const [globalFilter, setGlobalFilter] = useState('');
   const [createNewFilter, setCreateNewFilter] = useState(false);
@@ -99,7 +99,7 @@ const StepMaintenance = () => {
   };
 
   //按ID查找是否存在
-  const findDoesItExistById = (arr: LIST_ITEM[], id: string): boolean => {
+  const findDoesItExistById = (arr: LIST_ITEM_OLD[], id: string): boolean => {
     for (const value of arr) {
       if (value.data.id === id) {
         return true;
@@ -191,20 +191,22 @@ const StepMaintenance = () => {
 
   //子任务处理
 
-  const editStep = (step: LIST_ITEM) => {
+  const editStep = (step: LIST_ITEM_OLD) => {
     setStep({ ...step });
     setCreateNewFilter(false);
     setStopDialog(true);
   };
 
-  const confirmDeleteStep = (step: LIST_ITEM) => {
+  const confirmDeleteStep = (step: LIST_ITEM_OLD) => {
     setStep(step);
     setDeleteStepDialog(true);
   };
 
   //删除数据
   const deleteStep = () => {
-    const _steps = (steps as LIST_ITEM[]).filter((val) => val.key !== step.key);
+    const _steps = (steps as LIST_ITEM_OLD[]).filter(
+      (val) => val.key !== step.key
+    );
     setSteps(_steps);
     setDeleteStepDialog(false);
     setStep(emptySteps);
@@ -238,7 +240,7 @@ const StepMaintenance = () => {
 
       //部分选中
       if (partialChecked) {
-        val.children = (val.children as LIST_ITEM[]).filter(
+        val.children = (val.children as LIST_ITEM_OLD[]).filter(
           (children) =>
             !(
               selectedNodekey?.[
@@ -269,12 +271,12 @@ const StepMaintenance = () => {
   ) => {
     const val = 'target' in e && e.target && e.target.value;
     const _step = JSON.parse(JSON.stringify(step));
-    _step.data[`${name as keyof LIST_ITEM_DATA}`] = val;
+    _step.data[`${name as keyof LIST_ITEM_OLD}`] = val;
 
     setStep(_step);
   };
 
-  interface LIST_ITEM_DATE {
+  interface LIST_ITEM_OLD_DATE {
     startingTime: Date;
     endTime: Date;
   }
@@ -282,7 +284,7 @@ const StepMaintenance = () => {
   //更新时间
   const onDateChange = (
     e: CalendarChangeParams,
-    name: keyof LIST_ITEM_DATE
+    name: keyof LIST_ITEM_OLD_DATE
   ) => {
     const val = e.target.value;
     const _step = JSON.parse(JSON.stringify(step));
@@ -345,13 +347,13 @@ const StepMaintenance = () => {
   };
 
   // 操作按钮
-  const actionBodyTemplate = (rowData: LIST_ITEM) => {
+  const actionBodyTemplate = (rowData: LIST_ITEM_OLD) => {
     return (
       <div className='actions'>
         <Button
           icon='pi pi-pencil'
           className='p-button-rounded p-button-success mr-2'
-          onClick={() => editStep(rowData as LIST_ITEM)}
+          onClick={() => editStep(rowData as LIST_ITEM_OLD)}
         />
         <Button
           icon='pi pi-trash'
